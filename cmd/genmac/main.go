@@ -16,8 +16,16 @@ limitations under the License.
 
 package main
 
-import "log"
+import (
+	"log"
+
+	"github.com/krsacme/genmac/pkg/mac"
+)
 
 func main() {
 	log.Printf("hello, world!")
+	baseMacs := []string{"fa:3b:21:00:00:00", "fe:3b:21:00:00:00"}
+	mac.ConfigureBaseMacRange(baseMacs)
+	newMac, _ := mac.GenerateMacAddress()
+	log.Printf(newMac.String())
 }
