@@ -6,23 +6,14 @@ import (
 	"time"
 )
 
-const DefaultBaseMacString = "fa:3b:21:00:00:00"
+var DefaultBaseMacString = []string{
+	"f2:3b:21:00:00:00",
+	"f6:3b:21:00:00:00",
+	"fa:3b:21:00:00:00",
+	"fe:3b:21:00:00:00",
+}
 
 var baseMacList []net.HardwareAddr
-
-func GenerateMacAddress() (net.HardwareAddr, error) {
-	// Set Default value if base mac list is empty
-	if len(baseMacList) == 0 {
-		hw, err := net.ParseMAC(DefaultBaseMacString)
-		if err != nil {
-			return nil, err
-		}
-		baseMacList = append(baseMacList, hw)
-	}
-
-	newMac := generateMac(baseMacList)
-	return newMac, nil
-}
 
 // Configure the list of mac addresses to be used as base mac address to generate one
 // Entries should be a valid mac address in the locally administered address range
@@ -43,6 +34,18 @@ func ConfigureBaseMacRange(baseMacs []string) error {
 		baseMacList = append(baseMacList, hw)
 	}
 	return nil
+}
+
+func GenerateMacAddress() (net.HardwareAddr, error) {
+	// Set Default value if base mac list is empty
+	if len(baseMacList) == 0 {
+		err := ConfigureBaseMacRange(DefaultBaseMacString)
+		if err != nil {
+			return nil, err
+		}
+	}
+	newMac := generateMac(baseMacList)
+	return newMac, nil
 }
 
 func generateMac(baseMacs []net.HardwareAddr) net.HardwareAddr {

@@ -23,9 +23,8 @@ import (
 )
 
 func main() {
-	log.Printf("hello, world!")
-	baseMacs := []string{"fa:3b:21:00:00:00", "fe:3b:21:00:00:00"}
-	mac.ConfigureBaseMacRange(baseMacs)
+	//baseMacs := []string{"fa:3b:21:00:00:00", "fe:3b:21:00:00:00"}
+	//mac.ConfigureBaseMacRange(baseMacs)
 	newMac, _ := mac.GenerateMacAddress()
 	log.Printf(newMac.String())
 }
