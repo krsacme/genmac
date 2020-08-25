@@ -2,7 +2,8 @@
 
 set -eu
 
-REPO=github.com/krsacme/genmac
+#REPO=github.com/krsacme/genmac
+REPO=.
 WHAT=${WHAT:-genmac}
 GOTAGS=${GOTAGS:-}
 GLDFLAGS=${GLDFLAGS:-}
